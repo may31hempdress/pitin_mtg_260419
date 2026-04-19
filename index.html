@@ -403,8 +403,8 @@
 
 <div class="header">
   <h1>メンバー獲得戦略 4-7月計画</h1>
-  <p class="subtitle">人事図書館 スタッフMTG資料</p>
-  <p class="date">2026年4月19日 ｜ BD・CET・イベントT・オペレーションエクセレンス 共有用</p>
+  <p class="subtitle">2026/4/19 人事図書館 ピットインMTG資料</p>
+  <p class="date">BD・CET・イベントT・オペレーションエクセレンス 共有用</p>
 </div>
 
 <!-- 今日のMTG目的 -->
@@ -457,6 +457,44 @@
   </div>
   <div class="forward-message">
     💡 <strong>裏を返せば、退会率を元のレベルに戻せば一気に景色が変わる。</strong>ここが4-7月の最大の勝ち筋。
+  </div>
+</div>
+
+<!-- 直近トレンド -->
+<div class="segment-box">
+  <h3>直近12ヶ月の月次推移（2025年度を月単位で見ると）</h3>
+  <div class="chart-container" style="height: 340px; margin-bottom: 16px;">
+    <canvas id="monthlyTrendChart"></canvas>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px;">
+    <div style="background: #fef2f2; border-left: 3px solid #ef4444; border-radius: 8px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #dc2626; margin-bottom: 6px; letter-spacing: 0.5px;">退会率</div>
+      <div style="font-size: 13px; color: #333; line-height: 1.7;">
+        2025年度通年 <strong>4.4%/月</strong><br>
+        直近6ヶ月 <strong>4.86%/月</strong><br>
+        直近3ヶ月 <strong style="color:#dc2626;">4.96%/月（微悪化）</strong>
+      </div>
+    </div>
+    <div style="background: #ecfdf5; border-left: 3px solid #10b981; border-radius: 8px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #059669; margin-bottom: 6px; letter-spacing: 0.5px;">入会ペース</div>
+      <div style="font-size: 13px; color: #333; line-height: 1.7;">
+        2025年度通年 <strong>41名/月</strong><br>
+        直近6ヶ月 <strong>44名/月</strong><br>
+        直近3ヶ月 <strong style="color:#059669;">49名/月（回復傾向）</strong>
+      </div>
+    </div>
+    <div style="background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 8px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #d97706; margin-bottom: 6px; letter-spacing: 0.5px;">月次純増</div>
+      <div style="font-size: 13px; color: #333; line-height: 1.7;">
+        2025年度通年 <strong>+9名/月</strong><br>
+        直近6ヶ月 <strong>+8名/月</strong><br>
+        直近3ヶ月 <strong style="color:#d97706;">+11名/月（微改善）</strong>
+      </div>
+    </div>
+  </div>
+  <div style="background: #fff7ed; border-radius: 10px; padding: 14px 18px; margin-top: 14px; font-size: 13px; color: #7c2d12; line-height: 1.7; border-left: 3px solid #ea580c;">
+    📌 <strong>ファクト</strong>：退会率は直近も悪化傾向（4.4% → 4.96%）。ただし入会ペースも回復中（41→49名/月）で、純増は+9→+11名と微改善。<br>
+    <strong>意味合い</strong>：「入会を頑張った分を退会悪化が食い潰している」状態。獲得だけ増やしても抜けるので、<strong>バケツを塞ぐ重要性はむしろ増している</strong>。
   </div>
 </div>
 
@@ -742,8 +780,11 @@
 
 <!-- チーム別タスク -->
 <div class="section">
-  <span class="section-label">06 ｜ チーム別タスク</span>
-  <h2 class="section-title">全チームの役割分担</h2>
+  <span class="section-label">06 ｜ チーム別タスク（案）</span>
+  <h2 class="section-title">全チームの役割分担（案）</h2>
+  <p class="section-desc">
+    以下は現時点の叩き台。今日のMTGで議論し、各チームの納得感と現実性を踏まえて調整したい。
+  </p>
 </div>
 
 <div class="team-grid">
@@ -781,7 +822,7 @@
     </div>
     <div class="team-full">Event Team</div>
     <ul>
-      <li>体験会の運営（月2回、各回5-10名集客）</li>
+      <li>体験会の運営（月2回、各回5-10名集客）<strong>※Mαiがメイン担当</strong></li>
       <li>共催ウェビナーの企画・運営支援</li>
       <li>イベント参加データのPeatix連携整備</li>
       <li>既存イベントの継続運営（自然入会の維持）</li>
@@ -815,8 +856,8 @@
       <div class="week-label">第3週（4/14-4/20）</div>
       <ul>
         <li>スタッフMTGで合意形成（本日）</li>
-        <li>体験会4月分の告知開始</li>
         <li>紹介対象の既存メンバーリスト化</li>
+        <li>プロチェック受講者フォロー導線の設計着手</li>
       </ul>
     </div>
     <div class="week-col">
@@ -904,6 +945,39 @@
 </div>
 
 <script>
+  // 直近12ヶ月の月次推移チャート
+  const trendCtx = document.getElementById('monthlyTrendChart').getContext('2d');
+  const trendLabels = ['2025/04','05','06','07','08','09','10','11','12','2026/01','02','03'];
+  const monthlyInflow = [49, 49, 30, 32, 36, 36, 39, 31, 48, 48, 44, 55];
+  const monthlyChurn  = [38, 21, 30, 28, 30, 24, 38, 35, 32, 36, 38, 39];
+  const monthlyChurnRate = [5.63, 3.06, 4.20, 3.92, 4.18, 3.31, 5.15, 4.75, 4.37, 4.81, 4.99, 5.09];
+
+  new Chart(trendCtx, {
+    data: {
+      labels: trendLabels,
+      datasets: [
+        { type: 'bar', label: '月次入会数（名）', data: monthlyInflow, backgroundColor: 'rgba(16,185,129,0.65)', borderColor: '#10b981', borderWidth: 1, yAxisID: 'y', order: 2 },
+        { type: 'bar', label: '月次退会数（名）', data: monthlyChurn, backgroundColor: 'rgba(239,68,68,0.65)', borderColor: '#ef4444', borderWidth: 1, yAxisID: 'y', order: 2 },
+        { type: 'line', label: '月次退会率（%）', data: monthlyChurnRate, borderColor: '#7c2d12', backgroundColor: 'rgba(124,45,18,0.1)', borderWidth: 2.5, tension: 0.3, pointRadius: 4, pointHoverRadius: 6, yAxisID: 'y1', order: 1, fill: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true, pointStyle: 'rectRounded' } },
+        tooltip: { backgroundColor: 'rgba(26,26,26,0.92)', titleFont: { size: 12 }, bodyFont: { size: 11 }, padding: 10 }
+      },
+      scales: {
+        y: { position: 'left', beginAtZero: true, max: 80, title: { display: true, text: '人数（名）', font: { size: 10 } }, ticks: { font: { size: 10 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+        y1: { position: 'right', beginAtZero: true, max: 7, title: { display: true, text: '退会率（%）', font: { size: 10 } }, ticks: { font: { size: 10 }, callback: function(v){ return v + '%'; } }, grid: { display: false } },
+        x: { ticks: { font: { size: 10 } }, grid: { display: false } }
+      }
+    }
+  });
+
+  // 4-7月シミュレーションチャート
   const ctx = document.getElementById('growthChart').getContext('2d');
   const labels = ['4月開始', '4月末', '5月末', '6月末', '7月末'];
   const scenarioA = [783, 815, 870, 923, 998];
